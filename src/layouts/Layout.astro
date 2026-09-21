@@ -1,15 +1,63 @@
+---
+import '@/styles/global.css';
+import Hero from '@/components/Hero.astro';
+
+const t = {
+	en: {
+		greeting: 'Hi, I\'m',
+		name: 'Tumonulo',
+		desc: 'A developer passionate about technology, clean code, and continuous learning. I love exploring new tools and building useful solutions.',
+		projects: 'View Projects',
+		github: 'My GitHub',
+		toggleLabel: 'ES',
+	},
+	es: {
+		greeting: 'Hola, soy',
+		name: 'Tumonulo',
+		desc: 'Un desarrollador apasionado por la tecnología, el código limpio y el aprendizaje continuo. Me encanta explorar nuevas herramientas y construir soluciones útiles.',
+		projects: 'Ver Proyectos',
+		github: 'Mi GitHub',
+		toggleLabel: 'EN',
+	},
+};
+---
+
 <!doctype html>
-<html lang="en">
+<html lang="en" data-lang="en">
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<link rel="icon" href="/favicon.ico" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
+		<title>Tumonulo</title>
 	</head>
 	<body>
+		<Hero {t} />
+		<button
+			id="langToggle"
+			class="fixed top-4 right-4 rounded border border-slate-700 px-3 py-1.5 text-xs font-medium text-slate-400 transition hover:border-blue hover:text-blue"
+			aria-label="Toggle language"
+		>
+			{t.en.toggleLabel}
+		</button>
 		<slot />
+		<script is:inline>
+const t = {
+	en: { greeting: 'Hi, I\'m', name: 'Tumonulo', desc: 'A developer passionate about technology, clean code, and continuous learning. I love exploring new tools and building useful solutions.', projects: 'View Projects', github: 'My GitHub', toggleLabel: 'ES' },
+	es: { greeting: 'Hola, soy', name: 'Tumonulo', desc: 'Un desarrollador apasionado por la tecnología, el código limpio y el aprendizaje continuo. Me encanta explorar nuevas herramientas y construir soluciones útiles.', projects: 'Ver Proyectos', github: 'Mi GitHub', toggleLabel: 'EN' },
+};
+let lang = 'en';
+const update = (l) => {
+	lang = l;
+	document.documentElement.lang = l;
+	document.documentElement.dataset.lang = l;
+	document.querySelectorAll('.lang-en').forEach((e) => (e.style.display = l === 'en' ? '' : 'none'));
+	document.querySelectorAll('.lang-es').forEach((e) => (e.style.display = l === 'es' ? '' : 'none'));
+	document.getElementById('langToggle').textContent = l === 'en' ? t.es.toggleLabel : t.en.toggleLabel;
+};
+document.getElementById('langToggle').addEventListener('click', () => update(lang === 'en' ? 'es' : 'en'));
+</script>
 	</body>
 </html>
 
