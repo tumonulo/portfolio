@@ -1,0 +1,103 @@
+---
+import SectionHeading from '@/components/SectionHeading.astro';
+
+const groups = [
+	{
+		title: 'Lenguajes',
+		short: '</>',
+		items: ['TypeScript', 'JavaScript', 'Python', 'Ada', 'HTML', 'CSS'],
+	},
+	{
+		title: 'Frameworks y entorno',
+		short: '{}',
+		items: ['Node.js', 'Astro', 'Tailwind CSS', 'Discord.js', 'Vite'],
+	},
+	{
+		title: 'Datos y herramientas',
+		short: '//',
+		items: ['MongoDB', 'Git', 'GitHub', 'pnpm', 'VS Code'],
+	},
+];
+
+const technologies = [
+	'TypeScript',
+	'JavaScript',
+	'Node.js',
+	'Astro',
+	'Tailwind CSS',
+	'Discord.js',
+	'Python',
+	'MongoDB',
+	'Git',
+	'GitHub',
+];
+---
+
+<section id="stack" class="relative px-5 py-24 sm:px-6 sm:py-32">
+	<div class="mx-auto max-w-6xl">
+		<SectionHeading
+			eyebrow="Stack"
+			title="Mi"
+			highlight="stack"
+			description="Las tecnologías con las que trabajo día a día para construir bots, herramientas y experiencias web."
+		/>
+
+		<div class="marquee-mask relative mt-12 overflow-hidden py-2" data-reveal>
+			<div class="animate-marquee flex w-max">
+				<ul class="flex shrink-0 items-center gap-8 pr-8">
+					{
+						technologies.map((tech) => (
+							<li class="flex items-center gap-8 font-mono text-xs tracking-wider text-slate-500 uppercase sm:text-sm">
+								<span>{tech}</span>
+								<span class="h-1 w-1 rounded-full bg-accent/60"></span>
+							</li>
+						))
+					}
+				</ul>
+				<ul class="flex shrink-0 items-center gap-8 pr-8" aria-hidden="true">
+					{
+						technologies.map((tech) => (
+							<li class="flex items-center gap-8 font-mono text-xs tracking-wider text-slate-500 uppercase sm:text-sm">
+								<span>{tech}</span>
+								<span class="h-1 w-1 rounded-full bg-accent/60"></span>
+							</li>
+						))
+					}
+				</ul>
+			</div>
+		</div>
+
+		<div class="mt-10 grid gap-5 md:grid-cols-3">
+			{
+				groups.map((group, index) => (
+					<div
+						data-reveal
+						data-spotlight
+						style={`--reveal-delay:${index * 90}ms`}
+						class="spotlight group relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.02] p-6 transition duration-300 hover:-translate-y-1 hover:border-accent/30 hover:bg-white/[0.04]"
+					>
+						<div
+							class="spotlight-glow pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+							aria-hidden="true"
+						/>
+
+						<div class="relative flex items-center gap-3">
+							<span class="grid h-10 w-10 place-items-center rounded-xl bg-gradient-to-br from-accent/20 to-accent-light/10 font-mono text-xs font-semibold text-accent-soft ring-1 ring-white/10">
+								{group.short}
+							</span>
+							<h3 class="font-semibold text-white">{group.title}</h3>
+						</div>
+
+						<ul class="relative mt-5 flex flex-wrap gap-2">
+							{group.items.map((item) => (
+								<li class="rounded-lg border border-white/10 bg-white/[0.03] px-3 py-1.5 font-mono text-xs text-slate-400 transition duration-200 hover:-translate-y-0.5 hover:border-accent/40 hover:bg-accent/10 hover:text-white">
+									{item}
+								</li>
+							))}
+						</ul>
+					</div>
+				))
+			}
+		</div>
+	</div>
+</section>

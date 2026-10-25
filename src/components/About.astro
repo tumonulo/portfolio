@@ -1,0 +1,96 @@
+---
+import SectionHeading from '@/components/SectionHeading.astro';
+
+const values = [
+	{ title: 'Código limpio', desc: 'Estructuras claras, legibles y mantenibles.' },
+	{ title: 'Aprendizaje continuo', desc: 'Siempre explorando nuevas herramientas.' },
+	{ title: 'Automatización', desc: 'Menos tareas repetitivas, más tiempo útil.' },
+	{ title: 'Código abierto', desc: 'Compartir para que todos crezcan.' },
+];
+---
+
+<section id="sobre-mi" class="relative overflow-hidden px-5 py-24 sm:px-6 sm:py-32">
+	<div class="mx-auto grid max-w-6xl items-center gap-14 lg:grid-cols-2 lg:gap-16">
+		<div class="min-w-0">
+			<SectionHeading
+				eyebrow="Sobre mí"
+				title="Quién"
+				highlight="soy"
+				align="left"
+				description="Un desarrollador al que le gusta entender cómo funcionan las cosas por dentro y convertirlas en herramientas útiles."
+			/>
+
+			<p data-reveal style="--reveal-delay:70ms" class="mt-6 text-sm leading-relaxed text-slate-400 sm:text-base">
+				Soy Tumonulo, desarrollador apasionado por la tecnología, el código limpio y el aprendizaje continuo. Me
+				muevo entre TypeScript, Node.js y la web moderna, con especial cariño por los bots de Discord y todo lo
+				que se pueda automatizar.
+			</p>
+
+			<p data-reveal style="--reveal-delay:130ms" class="mt-4 text-sm leading-relaxed text-slate-400 sm:text-base">
+				Formo parte de <span class="font-medium text-slate-200">TS Community Brawl</span>, la comunidad española
+				de Brawl Stars en Discord, donde desarrollamos bots y proyectos de código abierto: desde sistemas de
+				niveles y ligas hasta paneles de gestión y clasificadores de texto.
+			</p>
+
+			<ul class="mt-8 grid gap-3 sm:grid-cols-2">
+				{
+					values.map((value, index) => (
+						<li
+							data-reveal
+							style={`--reveal-delay:${180 + index * 60}ms`}
+							class="flex items-start gap-3 rounded-xl border border-white/5 bg-white/[0.02] p-3.5 transition duration-300 hover:-translate-y-0.5 hover:border-accent/30 hover:bg-accent/5"
+						>
+							<span class="mt-0.5 grid h-6 w-6 shrink-0 place-items-center rounded-full bg-accent/10 text-accent-light">
+								<svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+									<path d="m5 12 4.5 4.5L19 7" />
+								</svg>
+							</span>
+							<span>
+								<span class="block text-sm font-semibold text-slate-200">{value.title}</span>
+								<span class="mt-0.5 block text-xs leading-relaxed text-slate-500">{value.desc}</span>
+							</span>
+						</li>
+					))
+				}
+			</ul>
+		</div>
+
+		<div class="relative min-w-0" data-reveal style="--reveal-delay:120ms">
+			<div
+				class="absolute -inset-6 rounded-3xl bg-gradient-to-tr from-accent/20 via-accent-light/10 to-transparent blur-2xl"
+				aria-hidden="true"
+			>
+			</div>
+
+			<div
+				data-spotlight
+				class="spotlight relative overflow-hidden rounded-2xl border border-white/10 bg-surface/80 shadow-2xl shadow-black/50 backdrop-blur"
+			>
+				<div class="spotlight-glow pointer-events-none absolute inset-0" aria-hidden="true"></div>
+
+				<div class="relative flex items-center gap-2 border-b border-white/5 px-4 py-3">
+					<span class="h-2.5 w-2.5 rounded-full bg-red-400/80"></span>
+					<span class="h-2.5 w-2.5 rounded-full bg-amber-400/80"></span>
+					<span class="h-2.5 w-2.5 rounded-full bg-emerald-400/80"></span>
+					<span class="ml-2 font-mono text-xs text-slate-500">perfil.ts</span>
+				</div>
+
+				<pre class="relative overflow-x-auto p-5 font-mono text-[0.78rem] leading-relaxed text-slate-400 sm:text-[0.85rem]"><code><span class="text-indigo-300">const</span> <span class="text-sky-300">perfil</span> = &#123;
+  <span class="text-slate-600">// un poco sobre mí</span>
+  nombre: <span class="text-emerald-300">"Tumonulo"</span>,
+  rol: <span class="text-emerald-300">"Desarrollador de software"</span>,
+  comunidad: <span class="text-emerald-300">"TS Community Brawl"</span>,
+  enfoque: [<span class="text-emerald-300">"bots"</span>, <span class="text-emerald-300">"web"</span>, <span class="text-emerald-300">"comunidad"</span>],
+  aprendiendo: [<span class="text-emerald-300">"TS"</span>, <span class="text-emerald-300">"Astro"</span>, <span class="text-emerald-300">"NLP"</span>],
+  cafe: <span class="text-amber-300">true</span>,
+&#125;;</code></pre>
+
+				<div class="relative flex flex-wrap gap-2 border-t border-white/5 px-5 py-4">
+					<span class="rounded-full border border-white/10 bg-white/[0.03] px-2.5 py-1 font-mono text-[0.65rem] text-slate-400"># código-abierto</span>
+					<span class="rounded-full border border-white/10 bg-white/[0.03] px-2.5 py-1 font-mono text-[0.65rem] text-slate-400"># discord</span>
+					<span class="rounded-full border border-white/10 bg-white/[0.03] px-2.5 py-1 font-mono text-[0.65rem] text-slate-400"># automation</span>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

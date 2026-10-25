@@ -1,0 +1,171 @@
+---
+import SectionHeading from '@/components/SectionHeading.astro';
+
+const projects = [
+	{
+		name: 'TS-Manager',
+		org: 'TS Community Brawl',
+		monogram: 'TM',
+		description:
+			'Bot oficial de Discord para la comunidad: gestión de clubes, niveles, tickets, moderación y automatización del servidor.',
+		tags: ['TypeScript', 'Discord.js', 'MongoDB'],
+		href: 'https://github.com/ts-community/TS-Manager',
+		gradient: 'from-blue-500 to-indigo-500',
+		featured: true,
+	},
+	{
+		name: 'TS-League',
+		org: 'TS Community Brawl',
+		monogram: 'TL',
+		description:
+			'Bot de gestión y automatización de ligas competitivas de Brawl Stars en Discord, con paneles y seguimiento de la competición.',
+		tags: ['JavaScript', 'Discord.js', 'Automatización'],
+		href: 'https://github.com/ts-community/TS-League',
+		gradient: 'from-cyan-500 to-blue-500',
+		featured: true,
+	},
+	{
+		name: 'clasificador-texto-ml',
+		org: 'TS Community Brawl',
+		monogram: 'PLN',
+		description:
+			'Detector de intenciones para Discord con TF-IDF y regresión logística: entrenado en Python y ejecutado en TypeScript sin dependencias.',
+		tags: ['TypeScript', 'Python', 'PLN'],
+		href: 'https://github.com/ts-community/clasificador-texto-ml',
+		gradient: 'from-violet-500 to-fuchsia-500',
+		featured: false,
+	},
+	{
+		name: 'TS-Levelling',
+		org: 'TS Community Brawl',
+		monogram: 'LV',
+		description:
+			'Bot de niveles y XP por actividad, con tarjeta /rank, clasificación /top y 42 récords para mantener la comunidad activa.',
+		tags: ['JavaScript', 'Discord.js', 'XP'],
+		href: 'https://github.com/ts-community/TS-Levelling',
+		gradient: 'from-emerald-500 to-teal-500',
+		featured: false,
+	},
+	{
+		name: 'discord.js-bots-template',
+		org: 'Proyecto personal',
+		monogram: 'JS',
+		description:
+			'Plantilla modular y extensible para bots de Discord en TypeScript con integración de MongoDB, pensada para empezar rápido.',
+		tags: ['TypeScript', 'MongoDB', 'Plantilla'],
+		href: 'https://github.com/tumonulo/discord.js-bots-template',
+		gradient: 'from-amber-500 to-orange-500',
+		featured: false,
+	},
+	{
+		name: 'Ada-Exercises',
+		org: 'Proyecto personal',
+		monogram: 'ADA',
+		description:
+			'Colección de ejercicios y pequeños programas creados mientras aprendía el lenguaje Ada y sus fundamentos.',
+		tags: ['Ada', 'Algoritmos', 'Aprendizaje'],
+		href: 'https://github.com/tumonulo/Ada-Exercises',
+		gradient: 'from-rose-500 to-pink-500',
+		featured: false,
+	},
+];
+---
+
+<section id="proyectos" class="relative px-5 py-24 sm:px-6 sm:py-32">
+	<div class="mx-auto max-w-6xl">
+		<SectionHeading
+			eyebrow="Proyectos"
+			title="Mis"
+			highlight="proyectos"
+			description="Una selección de lo que construyo: bots de Discord, herramientas para la comunidad y experimentos de código abierto."
+		/>
+
+		<div class="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+			{
+				projects.map((project, index) => (
+					<article data-reveal style={`--reveal-delay:${index * 70}ms`} class="h-full min-w-0">
+						<a
+							href={project.href}
+							target="_blank"
+							rel="noopener noreferrer"
+							data-spotlight
+							class="spotlight group relative flex h-full flex-col overflow-hidden rounded-2xl border border-white/10 bg-white/[0.02] p-6 transition duration-300 hover:-translate-y-1.5 hover:border-accent/40 hover:bg-white/[0.04] hover:shadow-2xl hover:shadow-accent/10"
+						>
+							<div
+								class="spotlight-glow pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+								aria-hidden="true"
+							/>
+
+							<div class="relative flex items-start justify-between gap-3">
+								<span
+									class={`grid h-12 w-12 place-items-center rounded-xl bg-gradient-to-br ${project.gradient} font-mono text-sm font-bold text-white shadow-lg`}
+								>
+									{project.monogram}
+								</span>
+
+								<div class="flex items-center gap-2">
+									{project.featured && (
+										<span class="rounded-full border border-accent/20 bg-accent/10 px-2 py-0.5 font-mono text-[0.6rem] tracking-wider text-accent-soft uppercase">
+											Destacado
+										</span>
+									)}
+									<svg
+										class="h-4 w-4 text-slate-600 transition duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-accent-light"
+										viewBox="0 0 24 24"
+										fill="none"
+										stroke="currentColor"
+										stroke-width="2"
+										stroke-linecap="round"
+										stroke-linejoin="round"
+										aria-hidden="true"
+									>
+										<path d="M7 17 17 7M8 7h9v9" />
+									</svg>
+								</div>
+							</div>
+
+							<h3 class="relative mt-5 text-lg font-semibold text-white transition-colors duration-300 group-hover:text-accent-soft">
+								{project.name}
+							</h3>
+							<p class="relative mt-1 font-mono text-[0.65rem] tracking-[0.15em] text-slate-500 uppercase">
+								{project.org}
+							</p>
+							<p class="relative mt-3 flex-1 text-sm leading-relaxed text-slate-400">{project.description}</p>
+
+							<ul class="relative mt-5 flex flex-wrap gap-2">
+								{project.tags.map((tag) => (
+									<li class="rounded-full border border-white/10 bg-white/[0.03] px-2.5 py-1 font-mono text-[0.65rem] text-slate-400 transition duration-300 group-hover:border-white/15 group-hover:text-slate-300">
+										{tag}
+									</li>
+								))}
+							</ul>
+						</a>
+					</article>
+				))
+			}
+		</div>
+
+		<div class="mt-14 flex justify-center" data-reveal>
+			<a
+				href="https://github.com/tumonulo?tab=repositories"
+				target="_blank"
+				rel="noopener noreferrer"
+				class="btn btn-ghost btn-shimmer group"
+			>
+				Ver todos los repositorios
+				<svg
+					class="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1"
+					viewBox="0 0 24 24"
+					fill="none"
+					stroke="currentColor"
+					stroke-width="2"
+					stroke-linecap="round"
+					stroke-linejoin="round"
+					aria-hidden="true"
+				>
+					<path d="M5 12h14M13 6l6 6-6 6" />
+				</svg>
+			</a>
+		</div>
+	</div>
+</section>

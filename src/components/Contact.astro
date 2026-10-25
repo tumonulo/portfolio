@@ -1,0 +1,190 @@
+---
+import SectionHeading from '@/components/SectionHeading.astro';
+
+const email = 'tscommunitybrawl@gmail.com';
+
+const links = [
+	{
+		badge: 'GH',
+		label: 'GitHub personal',
+		value: '@tumonulo',
+		href: 'https://github.com/tumonulo',
+		external: true,
+	},
+	{
+		badge: 'TS',
+		label: 'TS Community',
+		value: '@ts-community',
+		href: 'https://github.com/ts-community',
+		external: true,
+	},
+	{
+		badge: 'DC',
+		label: 'Discord',
+		value: 'Únete a la comunidad',
+		href: 'https://discord.gg/8nu3ZdDkp7',
+		external: true,
+	},
+	{
+		badge: '@',
+		label: 'Correo',
+		value: email,
+		href: `mailto:${email}`,
+		external: false,
+	},
+];
+---
+
+<section id="contacto" class="relative px-5 py-24 sm:px-6 sm:py-32">
+	<div class="mx-auto max-w-6xl">
+		<SectionHeading
+			eyebrow="Contacto"
+			title="Construyamos algo"
+			highlight="juntos"
+			description="¿Tienes una idea, una propuesta de colaboración o simplemente quieres saludar? Escríbeme y te responderé lo antes posible."
+		/>
+
+		<div class="mt-14" data-reveal style="--reveal-delay:80ms">
+			<div class="relative overflow-hidden rounded-3xl border border-white/10 bg-surface/60 p-1">
+				<div
+					class="pointer-events-none absolute -top-24 -right-20 h-64 w-64 rounded-full bg-accent/20 blur-[90px]"
+					aria-hidden="true"
+				>
+				</div>
+				<div
+					class="pointer-events-none absolute -bottom-24 -left-16 h-64 w-64 rounded-full bg-accent-light/10 blur-[90px]"
+					aria-hidden="true"
+				>
+				</div>
+
+				<div class="relative grid gap-10 rounded-[1.35rem] bg-ink/70 p-6 backdrop-blur sm:p-10 lg:grid-cols-[1fr_0.95fr] lg:gap-14">
+					<div class="min-w-0">
+						<p class="font-mono text-[0.7rem] tracking-[0.2em] text-accent-soft uppercase">Correo directo</p>
+
+						<div class="mt-4 flex flex-col items-start gap-3 sm:flex-row sm:items-center">
+							<a
+								href={`mailto:${email}`}
+								class="text-lg font-semibold break-all text-white transition hover:text-accent-light sm:text-xl"
+							>
+								{email}
+							</a>
+							<button
+								id="copy-email"
+								type="button"
+								data-email={email}
+								class="inline-flex shrink-0 items-center gap-1.5 rounded-full border border-white/15 bg-white/[0.03] px-3 py-1.5 text-xs font-medium text-slate-300 transition hover:border-accent/50 hover:bg-accent/10 hover:text-white active:scale-95"
+							>
+								<svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+									<rect x="9" y="9" width="12" height="12" rx="2" />
+									<path d="M5 15V5a2 2 0 0 1 2-2h10" />
+								</svg>
+								<span data-copy-label>Copiar</span>
+							</button>
+						</div>
+						<p id="copy-status" class="mt-2 h-4 text-xs text-emerald-400" role="status" aria-live="polite"></p>
+
+						<p class="mt-5 max-w-md text-sm leading-relaxed text-slate-400">
+							Ya sea para colaborar en un proyecto de código abierto, hablar de bots o compartir ideas, estaré
+							encantado de leerte. También puedes encontrarme en el Discord de la comunidad.
+						</p>
+
+						<div class="mt-7 flex flex-wrap gap-3">
+							<a
+								href="https://discord.gg/8nu3ZdDkp7"
+								target="_blank"
+								rel="noopener noreferrer"
+								class="btn btn-primary btn-shimmer group"
+							>
+								Unirme al Discord
+								<svg
+									class="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1"
+									viewBox="0 0 24 24"
+									fill="none"
+									stroke="currentColor"
+									stroke-width="2"
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									aria-hidden="true"
+								>
+									<path d="M5 12h14M13 6l6 6-6 6" />
+								</svg>
+							</a>
+							<a
+								href="https://github.com/tumonulo"
+								target="_blank"
+								rel="noopener noreferrer"
+								class="btn btn-secondary"
+							>
+								Ver GitHub
+							</a>
+						</div>
+					</div>
+
+					<div class="grid min-w-0 content-start gap-3 sm:grid-cols-2 lg:grid-cols-1">
+						{
+							links.map((link) => (
+								<a
+									href={link.href}
+									target={link.external ? '_blank' : undefined}
+									rel={link.external ? 'noopener noreferrer' : undefined}
+									data-spotlight
+									class="spotlight group relative flex items-center gap-4 overflow-hidden rounded-xl border border-white/10 bg-white/[0.02] p-4 transition duration-300 hover:-translate-y-0.5 hover:border-accent/40 hover:bg-white/[0.04]"
+								>
+									<div class="spotlight-glow pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100" aria-hidden="true" />
+									<span class="relative grid h-10 w-10 shrink-0 place-items-center rounded-lg border border-white/10 bg-white/[0.03] font-mono text-xs font-semibold text-accent-soft transition duration-300 group-hover:border-accent/40 group-hover:bg-accent/10">
+										{link.badge}
+									</span>
+									<span class="relative min-w-0">
+										<span class="block text-sm font-medium text-white">{link.label}</span>
+										<span class="block truncate text-xs text-slate-500">{link.value}</span>
+									</span>
+									<svg
+										class="relative ml-auto h-4 w-4 shrink-0 text-slate-600 transition duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-accent-light"
+										viewBox="0 0 24 24"
+										fill="none"
+										stroke="currentColor"
+										stroke-width="2"
+										stroke-linecap="round"
+										stroke-linejoin="round"
+										aria-hidden="true"
+									>
+										<path d="M7 17 17 7M8 7h9v9" />
+									</svg>
+								</a>
+							))
+						}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<script>
+	const copyButton = document.getElementById('copy-email');
+	const copyStatus = document.getElementById('copy-status');
+
+	const copyLabel = document.querySelector('[data-copy-label]');
+
+	if (copyButton && copyStatus && copyLabel) {
+		let resetTimer;
+
+		copyButton.addEventListener('click', async () => {
+			const email = copyButton.dataset.email || '';
+
+			try {
+				await navigator.clipboard.writeText(email);
+				copyStatus.textContent = '¡Correo copiado al portapapeles!';
+				copyLabel.textContent = 'Copiado';
+				window.clearTimeout(resetTimer);
+
+				resetTimer = window.setTimeout(() => {
+					copyStatus.textContent = '';
+					copyLabel.textContent = 'Copiar';
+				}, 2200);
+			} catch {
+				copyStatus.textContent = email;
+			}
+		});
+	}
+</script>

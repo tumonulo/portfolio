@@ -1,0 +1,54 @@
+---
+const year = new Date().getFullYear();
+---
+
+<footer class="border-t border-white/5 px-5 py-10 sm:px-6">
+	<div class="mx-auto flex max-w-6xl flex-col items-center justify-between gap-5 sm:flex-row">
+		<p class="text-xs text-slate-500">
+			© {year} Tumonulo · Hecho con{' '}
+			<a
+				href="https://astro.build"
+				target="_blank"
+				rel="noopener noreferrer"
+				class="text-slate-400 transition hover:text-accent-light">Astro</a
+			>{' '}
+			y{' '}
+			<a
+				href="https://tailwindcss.com"
+				target="_blank"
+				rel="noopener noreferrer"
+				class="text-slate-400 transition hover:text-accent-light">Tailwind CSS</a
+			>
+		</p>
+
+		<div class="flex items-center gap-5 text-xs">
+			<a
+				href="https://github.com/tumonulo"
+				target="_blank"
+				rel="noopener noreferrer"
+				class="text-slate-400 transition hover:text-white">GitHub</a
+			>
+			<a
+				href="https://discord.gg/8nu3ZdDkp7"
+				target="_blank"
+				rel="noopener noreferrer"
+				class="text-slate-400 transition hover:text-white">Discord</a
+			>
+			<a href="#inicio" class="group inline-flex items-center gap-1.5 text-slate-400 transition hover:text-white">
+				Volver arriba
+				<svg
+					class="h-3.5 w-3.5 transition-transform duration-300 group-hover:-translate-y-0.5"
+					viewBox="0 0 24 24"
+					fill="none"
+					stroke="currentColor"
+					stroke-width="2"
+					stroke-linecap="round"
+					stroke-linejoin="round"
+					aria-hidden="true"
+				>
+					<path d="M12 19V5M5 12l7-7 7 7" />
+				</svg>
+			</a>
+		</div>
+	</div>
+</footer>

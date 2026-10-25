@@ -1,71 +1,176 @@
 ---
 import '@/styles/global.css';
-import Hero from '@/components/Hero.astro';
+import Navbar from '@/components/Navbar.astro';
+import Footer from '@/components/Footer.astro';
 
-const t = {
-	en: {
-		greeting: 'Hi, I\'m',
-		name: 'Tumonulo',
-		desc: 'A developer passionate about technology, clean code, and continuous learning. I love exploring new tools and building useful solutions.',
-		projects: 'View Projects',
-		github: 'My GitHub',
-		toggleLabel: 'ES',
-	},
-	es: {
-		greeting: 'Hola, soy',
-		name: 'Tumonulo',
-		desc: 'Un desarrollador apasionado por la tecnología, el código limpio y el aprendizaje continuo. Me encanta explorar nuevas herramientas y construir soluciones útiles.',
-		projects: 'Ver Proyectos',
-		github: 'Mi GitHub',
-		toggleLabel: 'EN',
-	},
-};
+interface Props {
+	title?: string;
+	description?: string;
+}
+
+const {
+	title = 'Tumonulo — Desarrollador de software',
+	description = 'Portafolio de Tumonulo: desarrollador apasionado por la tecnología, el código limpio y el código abierto. Bots de Discord, desarrollo web y proyectos para TS Community Brawl.',
+} = Astro.props;
 ---
 
 <!doctype html>
-<html lang="en" data-lang="en">
+<html lang="es">
 	<head>
 		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Tumonulo</title>
+		<meta name="theme-color" content="#05070c" />
+		<meta name="author" content="Tumonulo" />
+		<meta name="description" content={description} />
+
+		<meta property="og:type" content="website" />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:site_name" content="Tumonulo" />
+		<meta property="og:image" content="https://avatars.githubusercontent.com/u/166932691?v=4" />
+		<meta name="twitter:card" content="summary" />
+		<meta name="twitter:image" content="https://avatars.githubusercontent.com/u/166932691?v=4" />
+		<meta name="twitter:title" content={title} />
+		<meta name="twitter:description" content={description} />
+
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" href="/favicon.ico" sizes="any" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
+			rel="stylesheet"
+		/>
+
+		<title>{title}</title>
 	</head>
-	<body>
-		<Hero {t} />
-		<button
-			id="langToggle"
-			class="fixed top-4 right-4 rounded border border-slate-700 px-3 py-1.5 text-xs font-medium text-slate-400 transition hover:border-blue hover:text-blue"
-			aria-label="Toggle language"
-		>
-			{t.en.toggleLabel}
-		</button>
-		<slot />
-		<script is:inline>
-const t = {
-	en: { greeting: 'Hi, I\'m', name: 'Tumonulo', desc: 'A developer passionate about technology, clean code, and continuous learning. I love exploring new tools and building useful solutions.', projects: 'View Projects', github: 'My GitHub', toggleLabel: 'ES' },
-	es: { greeting: 'Hola, soy', name: 'Tumonulo', desc: 'Un desarrollador apasionado por la tecnología, el código limpio y el aprendizaje continuo. Me encanta explorar nuevas herramientas y construir soluciones útiles.', projects: 'Ver Proyectos', github: 'Mi GitHub', toggleLabel: 'EN' },
-};
-let lang = 'en';
-const update = (l) => {
-	lang = l;
-	document.documentElement.lang = l;
-	document.documentElement.dataset.lang = l;
-	document.querySelectorAll('.lang-en').forEach((e) => (e.style.display = l === 'en' ? '' : 'none'));
-	document.querySelectorAll('.lang-es').forEach((e) => (e.style.display = l === 'es' ? '' : 'none'));
-	document.getElementById('langToggle').textContent = l === 'en' ? t.es.toggleLabel : t.en.toggleLabel;
-};
-document.getElementById('langToggle').addEventListener('click', () => update(lang === 'en' ? 'es' : 'en'));
-</script>
+	<body class="relative min-h-screen overflow-x-hidden">
+		<a href="#contenido" class="skip-link">Saltar al contenido</a>
+
+		<div class="pointer-events-none fixed inset-0 -z-10 overflow-hidden" aria-hidden="true">
+			<div class="bg-grid absolute inset-0"></div>
+			<div
+				class="animate-pulse-slow absolute -top-48 left-1/2 h-[34rem] w-[34rem] -translate-x-1/2 rounded-full bg-accent/20 blur-[130px]"
+			>
+			</div>
+			<div
+				class="absolute right-0 bottom-0 h-96 w-96 translate-x-1/3 translate-y-1/3 rounded-full bg-accent-light/10 blur-[110px]"
+			>
+			</div>
+		</div>
+
+		<div id="cursor-dot" class="cursor-dot is-hidden" aria-hidden="true"></div>
+		<div id="cursor-ring" class="cursor-ring is-hidden" aria-hidden="true"><span></span></div>
+
+		<Navbar />
+
+		<main id="contenido">
+			<slot />
+		</main>
+
+		<Footer />
+
+		<noscript>
+			<style>
+				[data-reveal] {
+					opacity: 1 !important;
+					transform: none !important;
+				}
+			</style>
+		</noscript>
+
+		<script>
+			const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+			// Reveal on scroll
+			const revealElements = document.querySelectorAll('[data-reveal]');
+
+			if (reduceMotion || !('IntersectionObserver' in window)) {
+				revealElements.forEach((element) => element.classList.add('is-visible'));
+			} else {
+				const observer = new IntersectionObserver(
+					(entries, instance) => {
+						entries.forEach((entry) => {
+							if (!entry.isIntersecting) return;
+							entry.target.classList.add('is-visible');
+							instance.unobserve(entry.target);
+						});
+					},
+					{ threshold: 0.12, rootMargin: '0px 0px -8% 0px' },
+				);
+
+				revealElements.forEach((element) => observer.observe(element));
+			}
+
+			// Spotlight cards
+			document.querySelectorAll('[data-spotlight]').forEach((card) => {
+				card.addEventListener(
+					'pointermove',
+					(event) => {
+						const rect = card.getBoundingClientRect();
+						card.style.setProperty('--mx', `${event.clientX - rect.left}px`);
+						card.style.setProperty('--my', `${event.clientY - rect.top}px`);
+					},
+					{ passive: true },
+				);
+			});
+
+			// Custom cursor
+			const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+			const dot = document.getElementById('cursor-dot');
+			const ring = document.getElementById('cursor-ring');
+
+			if (finePointer && !reduceMotion && dot && ring) {
+				document.documentElement.classList.add('has-cursor');
+
+				let mouseX = window.innerWidth / 2;
+				let mouseY = window.innerHeight / 2;
+				let ringX = mouseX;
+				let ringY = mouseY;
+				let visible = false;
+
+				const render = () => {
+					ringX += (mouseX - ringX) * 0.18;
+					ringY += (mouseY - ringY) * 0.18;
+					dot.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0)`;
+					ring.style.transform = `translate3d(${ringX}px, ${ringY}px, 0)`;
+					requestAnimationFrame(render);
+				};
+
+				window.addEventListener(
+					'pointermove',
+					(event) => {
+						mouseX = event.clientX;
+						mouseY = event.clientY;
+
+						if (!visible) {
+							visible = true;
+							ringX = mouseX;
+							ringY = mouseY;
+							dot.classList.remove('is-hidden');
+							ring.classList.remove('is-hidden');
+						}
+
+						const target = event.target instanceof Element ? event.target : null;
+						const interactive = target?.closest('a, button, [data-cursor], [role="button"]');
+						ring.classList.toggle('is-hover', Boolean(interactive));
+						dot.classList.toggle('is-hover', Boolean(interactive));
+					},
+					{ passive: true },
+				);
+
+				const hideCursor = () => {
+					visible = false;
+					dot.classList.add('is-hidden');
+					ring.classList.add('is-hidden');
+				};
+
+				document.addEventListener('mouseleave', hideCursor);
+				window.addEventListener('blur', hideCursor);
+
+				requestAnimationFrame(render);
+			}
+		</script>
 	</body>
 </html>
-
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
-</style>
